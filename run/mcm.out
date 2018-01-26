@@ -1,17 +1,9 @@
-Nombre de realisations demandees : 10000
-Nombre de realisations effectuees : 10000
+Nombre de realisations demandees : 1000000
+Nombre de realisations effectuees : 1000000
 Nombre de variables aleatoires : 2
-Nombre de parametres : 3
-Variable 1 sur le processus 1 : 2.45397e-317 [incertitude: 0]
-Sensibilites :
-  Parametre 1 : 6.95314e-310 [incertitude: 0]
-  Parametre 2 : 6.95314e-310 [incertitude: 0]
-  Parametre 3 : 6.95314e-310 [incertitude: 0]
-Variable 2 sur le processus 1 : 0.49668 [incertitude: 0.00288054]
-Sensibilites :
-  Parametre 1 : 0 [incertitude: 0]
-  Parametre 2 : 0 [incertitude: 0]
-  Parametre 3 : 0 [incertitude: 0]
+Nombre de parametres : 0
+Variable 1 sur le processus 1 : 1.3336 [incertitude: 0.000471054]
+Variable 2 sur le processus 1 : 2 [incertitude: 0]
 Nombre maximum de cycles de generations aleatoires : 100000
 Nombre de generations independantes avant de changer de cycle : 1000000
-Nombre de cycles ayant deja ete employes : 3
+Nombre de cycles ayant deja ete employes : 7
