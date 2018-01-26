@@ -1,0 +1,22 @@
+
+WorldBegin
+
+
+AttributeBegin
+ReverseOrientation
+AreaLightSource "area" "color L" [0.2 0.2 0.2] "integer nsamples"  [8] "bool mcmSurfaceIntegrable" ["true"]
+Texture "checks" "color" "checkerboard"
+        "float uscale" [4] "float vscale" [4]
+        "color tex1" [1 0 0] "color tex2" [0 0 1]
+Texture "cstc" "color" "constant" "color value" [0 0 0]
+Texture "cstf" "float" "constant" "float value" [-2.]
+Texture "cstd" "double" "constant" "double value" [0.5]
+Texture "csti" "int" "constant" "integer value" [0]
+Material "mcmMatte"
+         "texture Kd" "cstc"
+         "texture numero" "csti"
+         "texture temperature" "cstd"
+Shape "sphere" "float radius" [1] 
+AttributeEnd
+ 
+WorldEnd

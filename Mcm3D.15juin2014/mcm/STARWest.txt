@@ -1,0 +1,17 @@
+STARWest is a research group that gathers physicists from three french
+laboratories : RAPSODEE (Albi), LAPLACE (Toulouse), PROMES (Odeillo).
+
+See http://www.starwest.ups-tlse.fr/
+
+RAPSODEE (Centre de Recherche d'Albi en génie des Procédés
+des Solides Divisés, de l'Energie et de l'Environnement,
+http://www.enstimac.fr/recherche/rapsodee/) - Ecole des Mines
+d'Albi Carmaux (http://www.enstimac.fr/) - CNRS (http://www.cnrs.fr/)
+
+LAPLACE (Laboratoire Plasma et Conversion d'énergie,
+http://www.laplace.univ-tlse.fr/) - Université Paul Sabatier
+(http://www.ups-tlse.fr/) - CNRS (http://www.cnrs.fr/)
+
+PROMES (Procédés Matériaux et Energie Solaire,
+http://www.promes.cnrs.fr/) - Université de Perpignan
+Via Domitia (http://www.univ-perp.fr/) - CNRS (http://www.cnrs.fr/)
