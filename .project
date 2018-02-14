@@ -26,7 +26,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1516962815625</id>
+			<id>1518529830716</id>
 			<name></name>
 			<type>25</type>
 			<matcher>
@@ -35,7 +35,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1516962815637</id>
+			<id>1518529830723</id>
 			<name></name>
 			<type>9</type>
 			<matcher>
@@ -44,7 +44,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1516962815643</id>
+			<id>1518529830736</id>
 			<name></name>
 			<type>25</type>
 			<matcher>
@@ -53,7 +53,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1516962815655</id>
+			<id>1518529830742</id>
 			<name></name>
 			<type>25</type>
 			<matcher>
@@ -62,12 +62,39 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1516962815672</id>
+			<id>1518529830754</id>
 			<name></name>
 			<type>25</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-name-matches-false-false-core</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1518529830760</id>
+			<name></name>
+			<type>25</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-Scripts Perl</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1518529830775</id>
+			<name></name>
+			<type>25</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-renderer</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1518529830854</id>
+			<name></name>
+			<type>25</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-bin</arguments>
 			</matcher>
 		</filter>
 		<filter>

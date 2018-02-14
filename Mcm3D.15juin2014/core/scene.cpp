@@ -45,7 +45,8 @@
 #include "sampling.h"
 #include "dynload.h"
 #include "volume.h"
-#include "mcmAlgo.h"
+#include "../mcmCodage/mcmAlgo.h"
+#include "../mcmCodage/mcmMethodes.h"
 // Scene Methods
 void Scene::Render() {
   if (mcmNombreDeProcessus() >= 3) {
@@ -192,3 +193,4 @@ Spectrum Scene::Li(const RayDifferential &ray,
 Spectrum Scene::Transmittance(const Ray &ray) const {
 	return volumeIntegrator->Transmittance(this, ray, NULL, NULL);
 }
+

@@ -1,3 +1,11 @@
-ConcentrationSpiruline (mol/m^3) : 0.001
-Parametre d'assymetrie: 0.98
-Fichier geometrie.in: Sphere.in
+#les lignes de commentaires débutent par un #
+#parametres:
+Concentration Reinecke	2.	mol.m-3	concentrationReinecke	double	1
+Concentration Coproduit	0.5	mol.m-3	concentrationCoprod	double	1
+#
+#Spectre: 
+SpectreSimulateur_750.txt	begin:2	colonnes:2	lambda	double	1	spectreNonNorm	double	1
+#
+#Proprietes radiatives :
+EaReinecke.txt	begin:2	colonnes:2	lambdaReinecke	double	1e-9	eaReinecke	double	1
+EaCoproduit.txt	begin:2	colonnes:2	lambdaCoprod	double	1	eaCoprod	double	1

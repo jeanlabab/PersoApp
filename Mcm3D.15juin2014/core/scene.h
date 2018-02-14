@@ -45,6 +45,12 @@
 #include "primitive.h"
 #include "transport.h"
 #include "mcm.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <cstddef>      // std::size_t
+#include <valarray>     // std::valarray
 // Scene Declarations
 class COREDLL Scene : public mcmMonteCarlo {
 public:
@@ -96,6 +102,7 @@ protected:
 	}
         //data
 	double mcmSommeDesAiresDesSurfacesIntegrables;
+
 #include "mcmVariables.h"
 #include "mcmMethodes.h"
 };

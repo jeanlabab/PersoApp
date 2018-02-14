@@ -16,3 +16,26 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+//#debut de l'ajout par import_proprietes.pl
+//Concentration Reinecke
+double concentrationReinecke;
+//Concentration Coproduit
+double concentrationCoprod;
+
+//fichier: SpectreSimulateur_750.txt
+std::valarray<double> lambda;
+std::valarray<double> spectreNonNorm;
+
+//fichier: EaReinecke.txt
+std::valarray<double> lambdaReinecke;
+std::valarray<double> eaReinecke;
+
+//fichier: EaCoproduit.txt
+std::valarray<double> lambdaCoprod;
+std::valarray<double> eaCoprod;
+//#fin de l'ajout par import_proprietes.pl
+
+
+
+
