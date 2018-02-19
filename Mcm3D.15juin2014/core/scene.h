@@ -51,6 +51,7 @@
 #include <string>
 #include <cstddef>      // std::size_t
 #include <valarray>     // std::valarray
+#include <cassert>
 // Scene Declarations
 class COREDLL Scene : public mcmMonteCarlo {
 public:

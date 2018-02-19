@@ -16,25 +16,26 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 //#debut de l'ajout par import_proprietes.pl
 
 //Concentration Reinecke
-concentrationReinecke=extraireParametre("proprietes.in",3,2,1.);
+concentrationReinecke=extraireParametre("proprietes.in",12,2,1.);
 
 //Concentration Coproduit
-concentrationCoprod=extraireParametre("proprietes.in",4,2,1.);
+concentrationCoprod=extraireParametre("proprietes.in",13,2,1.);
 
 //fichier: SpectreSimulateur_750.txt
- lambda = extraireFichier("SpectreSimulateur_750.txt",2, 1,701,1.);
- spectreNonNorm = extraireFichier("SpectreSimulateur_750.txt",2, 2,701,1.);
+lambdaSpectre = extraireFichier("SpectreSimulateur_750.txt",2, 1,701,1.);
+spectreNonNorm = extraireFichier("SpectreSimulateur_750.txt",2, 2,701,1.);
 
 //fichier: EaReinecke.txt
- lambdaReinecke = extraireFichier("EaReinecke.txt",2, 1,203,1e-9);
- eaReinecke = extraireFichier("EaReinecke.txt",2, 2,203,1.);
+lambdaReinecke = extraireFichier("EaReinecke.txt",2, 1,203,1.);
+arrayEaReinecke = extraireFichier("EaReinecke.txt",2, 2,203,1.);
 
 //fichier: EaCoproduit.txt
- lambdaCoprod = extraireFichier("EaCoproduit.txt",2, 1,401,1.);
- eaCoprod = extraireFichier("EaCoproduit.txt",2, 2,401,1.);
+lambdaCoprod = extraireFichier("EaCoproduit.txt",2, 1,401,1.);
+arrayEaCoprod = extraireFichier("EaCoproduit.txt",2, 2,401,1.);
 //#fin de l'ajout par import_proprietes.pl
 
+cumulInvLambda = genererCumulInv(lambdaSpectre, spectreNonNorm,1000);
+//imprimerValArray("cumulInvLambda", cumulInvLambda, mcmIsProcessus1());

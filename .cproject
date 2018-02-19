@@ -74,6 +74,7 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="cdt.managedbuild.config.gnu.exe.debug.1999059371.2070210707" name="mcmEntrees.h" rcbsApplicability="disable" resourcePath="Mcm3D.15juin2014/mcmCodage/mcmEntrees.h" toolsToInvoke=""/>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>

@@ -24,17 +24,18 @@ double concentrationReinecke;
 double concentrationCoprod;
 
 //fichier: SpectreSimulateur_750.txt
-std::valarray<double> lambda;
+std::valarray<double> lambdaSpectre;
 std::valarray<double> spectreNonNorm;
 
 //fichier: EaReinecke.txt
 std::valarray<double> lambdaReinecke;
-std::valarray<double> eaReinecke;
+std::valarray<double> arrayEaReinecke;
 
 //fichier: EaCoproduit.txt
 std::valarray<double> lambdaCoprod;
-std::valarray<double> eaCoprod;
+std::valarray<double> arrayEaCoprod;
 //#fin de l'ajout par import_proprietes.pl
+std::valarray<double> cumulInvLambda;
 
 
 

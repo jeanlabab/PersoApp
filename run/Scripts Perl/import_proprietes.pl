@@ -112,7 +112,7 @@ for ( my $i = 0 ; $i < $nbFichiers ; $i++ ) {
 }
 
 ###########################################################
-#			Imprimer un bilan
+#			Afficher un bilan
 ###########################################################
 print("\n$nbParametres parametres trouvés:");
 foreach my $k ( keys(%parametres) ) {
@@ -181,7 +181,7 @@ foreach $lEntrees (@fichierEntrees) {
 					for ( my $j = 0 ; $j < $fichiers{$i}{NBCOLONNES} ; $j++ ) {
 						###FICHIER mcmEntrees.h
 						$lEntrees .=
-						    " ${fichiers{$i}{COLONNES}{$j}{VARIABLE}} = "
+						    "${fichiers{$i}{COLONNES}{$j}{VARIABLE}} = "
 						  . "extraireFichier(\"${fichiers{$i}{NOM}}\""
 						  . ",${fichiers{$i}{DEBUT}}, ${fichiers{$i}{COLONNES}{$j}{NUMERO}},"
 						  . "${fichiers{$i}{NBVALEURS}},${fichiers{$i}{COLONNES}{$j}{COEFF}});\n";
