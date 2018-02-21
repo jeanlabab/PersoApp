@@ -15,7 +15,7 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 	bool imprimer(false);
 
 //Photons perdus
-	int nbPerdu;
+	int nbPerdu(0);
 	beginning: ;
 
 //Suivi de rayon
@@ -66,9 +66,9 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 		if (!Intersect(rayonSuivi, &impactSurface)) {
 			nbPerdu++;
 			if (imprimer) {
-				std::cout << "photon perdu" << std::endl;
+				std::cout << "photon perdu, total:" << nbPerdu << std::endl;
 			}
-			assert(nbPerdu > 0.1 * nombreDeRealisationsDemandees);
+			assert(nbPerdu < 0.1 * nombreDeRealisationsDemandees);
 			goto beginning;
 		} else {
 			distanceSurface = Distance(rayonSuivi.o, impactSurface.dg.p);
@@ -79,7 +79,9 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 			if (longueurAbs > distanceSurface) {
 				longueurTotChemin += distanceSurface;
 				nbReflexions++;
+
 				assert(nbReflexions < 1000);
+
 				//indice de la surface
 				impactSurface.GetBSDF(RayDifferential(rayonSuivi))->get_mcmSurfaceAvecNumero(
 						indiceSurface);
@@ -146,4 +148,5 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 	BSDF::FreeAll(); // Free the memory that Pbrt uses for BSDF usage (at intersection points)
 
 	return vsr;
+
 }

@@ -3,8 +3,8 @@ Nombre de realisations effectuees : 1000
 Nombre de variables aleatoires : 3
 Nombre de parametres : 0
 Variable 1 sur le processus 1 : 0 [incertitude: 0]
-Variable 2 sur le processus 1 : 0.152284 [incertitude: 0.00931171]
-Variable 3 sur le processus 1 : 0.0614878 [incertitude: 0.00494105]
+Variable 2 sur le processus 1 : 0.161991 [incertitude: 0.00954478]
+Variable 3 sur le processus 1 : 0.0753695 [incertitude: 0.00574683]
 Nombre maximum de cycles de generations aleatoires : 100000
 Nombre de generations independantes avant de changer de cycle : 1000000
 Nombre de cycles ayant deja ete employes : 3
