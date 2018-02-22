@@ -12,7 +12,7 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 //***********************************************************************************************
 
 //Photons perdus
-	int nbPerdu;
+	int nbPerdu(0);
 	beginning: ;
 
 //Suivi de rayon
@@ -54,7 +54,7 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 	while (!absorption) {
 		if (!Intersect(rayonSuivi, &impactSurface)) {
 			nbPerdu++;
-			assert(nbPerdu > 0.1 * nombreDeRealisationsDemandees);
+			assert(nbPerdu < 0.04 * nombreDeRealisationsDemandees);
 			goto beginning;
 		} else {
 			distanceSurface = Distance(rayonSuivi.o, impactSurface.dg.p);
@@ -86,16 +86,8 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 //absorption dans le volume
 			else {
 				longueurTotChemin += longueurAbs;
-//absorption par reinecke
-				if (mcmRng() < kaReinecke / kaTot) {
-					poids = 1.;
-					absorption = true;
-				}
-//absorption par coproduit
-				else {
-					poids = 0.;
-					absorption = true;
-				}
+				poids = kaReinecke / kaTot;
+				absorption = true;
 			}
 		}
 	}

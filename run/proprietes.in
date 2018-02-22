@@ -9,8 +9,8 @@
 #nom de la variable	type c++
 #--------------------------------------------------------------------
 #parametres:
-Concentration Reinecke	2.	mol.m-3	concentrationReinecke	double	1
-Concentration Coproduit	0.5	mol.m-3	concentrationCoprod	double	1
+Concentration Reinecke	7.	mol.m-3	concentrationReinecke	double	1
+Concentration Coproduit	7.	mol.m-3	concentrationCoprod	double	1
 #
 #Spectre: 
 SpectreSimulateur_750.txt	begin:2	colonnes:2	lambdaSpectre	double	1	spectreNonNorm	double	1
