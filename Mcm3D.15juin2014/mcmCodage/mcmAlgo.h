@@ -12,7 +12,7 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 //***********************************************************************************************
 
 //Photons perdus
-	int nbPerdu;
+	int nbPerdu(0);
 	beginning: ;
 
 //Suivi de rayon
@@ -54,7 +54,7 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 	while (!absorption) {
 		if (!Intersect(rayonSuivi, &impactSurface)) {
 			nbPerdu++;
-			assert(nbPerdu > 0.1 * nombreDeRealisationsDemandees);
+			assert(nbPerdu < 0.1 * nombreDeRealisationsDemandees);
 			goto beginning;
 		} else {
 			distanceSurface = Distance(rayonSuivi.o, impactSurface.dg.p);
@@ -105,7 +105,7 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 //***********************************************************************************************
 	vsr.initialisationUneComposante(
 			indiceDeLaCoordonneeDuVecteurSommeDeRealisations(1),
-			nbPerdu / (nbPerdu + 1));
+			nbPerdu / (double)(nbPerdu + 1));
 	vsr.initialisationUneComposante(
 			indiceDeLaCoordonneeDuVecteurSommeDeRealisations(2), poids);
 	vsr.initialisationUneComposante(
