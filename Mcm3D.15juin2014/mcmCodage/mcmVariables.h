@@ -18,25 +18,14 @@
 */
 
 //#debut de l'ajout par import_proprietes.pl
-//Concentration Reinecke
-double concentrationReinecke;
-//Concentration Coproduit
-double concentrationCoprod;
-
-//fichier: SpectreSimulateur_750.txt
-std::valarray<double> lambdaSpectre;
-std::valarray<double> spectreNonNorm;
-
-//fichier: EaReinecke.txt
-std::valarray<double> lambdaReinecke;
-std::valarray<double> arrayEaReinecke;
-
-//fichier: EaCoproduit.txt
-std::valarray<double> lambdaCoprod;
-std::valarray<double> arrayEaCoprod;
+//reflectivite cellulose
+double rhoCellulose;
+//reflectivite biofilm
+double rhoBiofilm;
 //#fin de l'ajout par import_proprietes.pl
 
 std::valarray<double> cumulInvLambda;
+
 
 
 

@@ -18,24 +18,9 @@
  */
 //#debut de l'ajout par import_proprietes.pl
 
-//Concentration Reinecke
-concentrationReinecke=extraireParametre("proprietes.in",12,2,1.);
+//reflectivite cellulose
+rhoCellulose=extraireParametre("proprietes.in",12,2,1.);
 
-//Concentration Coproduit
-concentrationCoprod=extraireParametre("proprietes.in",13,2,1.);
-
-//fichier: SpectreSimulateur_750.txt
-lambdaSpectre = extraireFichier("SpectreSimulateur_750.txt",2, 1,701,1.);
-spectreNonNorm = extraireFichier("SpectreSimulateur_750.txt",2, 2,701,1.);
-
-//fichier: EaReinecke.txt
-lambdaReinecke = extraireFichier("EaReinecke.txt",2, 1,203,1.);
-arrayEaReinecke = extraireFichier("EaReinecke.txt",2, 2,203,1.);
-
-//fichier: EaCoproduit.txt
-lambdaCoprod = extraireFichier("EaCoproduit.txt",2, 1,401,1.);
-arrayEaCoprod = extraireFichier("EaCoproduit.txt",2, 2,401,1.);
+//reflectivite biofilm
+rhoBiofilm=extraireParametre("proprietes.in",13,2,1.);
 //#fin de l'ajout par import_proprietes.pl
-
-cumulInvLambda = genererCumulInv(lambdaSpectre, spectreNonNorm,1000);
-//imprimerValArray("cumulInvLambda", cumulInvLambda, mcmIsProcessus1());

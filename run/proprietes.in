@@ -9,12 +9,5 @@
 #nom de la variable	type c++
 #--------------------------------------------------------------------
 #parametres:
-Concentration Reinecke	2.	mol.m-3	concentrationReinecke	double	1
-Concentration Coproduit	0.5	mol.m-3	concentrationCoprod	double	1
-#
-#Spectre: 
-SpectreSimulateur_750.txt	begin:2	colonnes:2	lambdaSpectre	double	1	spectreNonNorm	double	1
-#
-#Proprietes radiatives :
-EaReinecke.txt	begin:2	colonnes:2	lambdaReinecke	double	1	arrayEaReinecke	double	1
-EaCoproduit.txt	begin:2	colonnes:2	lambdaCoprod	double	1	arrayEaCoprod	double	1
+reflectivite cellulose	0.2	nb	rhoCellulose	double	1
+reflectivite biofilm	0.1	nb	rhoBiofilm	double	1

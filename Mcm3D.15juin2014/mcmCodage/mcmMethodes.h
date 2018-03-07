@@ -35,7 +35,7 @@ void imprimerValArray(const std::string nom,
 
 void imprimerValArray(const std::string nom,
 		const std::valarray<double> vecteur) const {
-	imprimerValArray(nom, vecteur, 0);
+	imprimerValArray(nom, vecteur, 1);
 }
 
 double interpolLin(const double valeurX, const std::valarray<double> x,
