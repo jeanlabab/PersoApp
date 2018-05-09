@@ -1,4 +1,5 @@
 #les lignes de commentaires débutent par un #
+#PAS D'ACCENT!!!!!!
 #--------------------------------------------------------------------
 #PARAMETRES:
 #nom	valeur	unité	nom de la variable	type c++ 	coefficient
@@ -11,4 +12,5 @@
 #parametres:
 reflectivite cellulose	0.2	nb	rhoCellulose	double	1
 reflectivite biofilm	0.1	nb	rhoBiofilm	double	1
-reflexion parois speculaire	1	nb	reflexionSpeculaire	bool	1	
+reflectivite fond	1	nb	rhoFond	double	1
+reflexion parois speculaire	1	nb	reflexionSpeculaire	bool	1

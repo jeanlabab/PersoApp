@@ -9,7 +9,7 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 //***********************************************************************************************
 
 //impression des chemins
-	bool imprimer(false);
+	bool imprimer(true);
 	bool imprimer_points(false);
 
 //Photons perdus
@@ -80,8 +80,17 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 			switch (indiceSurface) {
 //interaction avec le fond
 			case 0:
-				transmis = true;
-				absorption = true;
+				if (mcmRng()>rhoFond){
+					transmis = true;
+					absorption = true;
+				}
+				else {
+					directionReflexion = rayonSuivi.d;
+					directionReflexion.z = -directionReflexion.z;
+					rayonSuivi = Ray(impactSurface.dg.p, directionReflexion,
+							RAY_EPSILON, INFINITY, 0.);
+					reflexionStandard = false;
+				}
 				if (imprimer) {
 					std::cout << " bas de la cuve";
 				}

@@ -19,11 +19,14 @@
 //#debut de l'ajout par import_proprietes.pl
 
 //reflectivite cellulose
-rhoCellulose=extraireParametre("proprietes.in",12,2,1.);
+rhoCellulose=extraireParametre("proprietes.in",13,2,1.);
 
 //reflectivite biofilm
-rhoBiofilm=extraireParametre("proprietes.in",13,2,1.);
+rhoBiofilm=extraireParametre("proprietes.in",14,2,1.);
+
+//reflectivite fond
+rhoFond=extraireParametre("proprietes.in",15,2,1.);
 
 //reflexion parois speculaire
-reflexionSpeculaire=extraireParametre("proprietes.in",14,2,1.);
+reflexionSpeculaire=extraireParametre("proprietes.in",16,2,1.);
 //#fin de l'ajout par import_proprietes.pl
