@@ -22,6 +22,8 @@
 double rhoCellulose;
 //reflectivite biofilm
 double rhoBiofilm;
+//reflexion parois speculaire
+bool reflexionSpeculaire;
 //#fin de l'ajout par import_proprietes.pl
 
 std::valarray<double> cumulInvLambda;

@@ -10,6 +10,7 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 
 //impression des chemins
 	bool imprimer(false);
+	bool imprimer_points(false);
 
 //Photons perdus
 	int nbPerdu = 0;
@@ -53,6 +54,7 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 		std::cout << "\némission depuis " << emission.o << std::endl;
 		std::cout << "suivant " << emission.d << std::endl;
 	}
+	if (imprimer_points){std::cout <<"\nNouveau rayon\n"<< emission.o << std::endl;}
 //boucle sur les reflexions
 	while (!absorption) {
 		if (!Intersect(rayonSuivi, &impactSurface)) {
@@ -86,7 +88,7 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 				break;
 //interaction avec une extremité
 			case 1:
-				//gestion des reflexions particulières, sur un plan Oxz
+				//gestion des reflexions speculaires, sur un plan Oxz
 				//on inverse simplement la coordonnée y pour avoir le vecteur de reflexion
 				directionReflexion = rayonSuivi.d;
 				directionReflexion.y = -directionReflexion.y;
@@ -131,16 +133,32 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 			if (imprimer) {
 				std::cout << " au point " << impactSurface.dg.p << std::endl;
 			}
+			if (imprimer_points){std::cout << impactSurface.dg.p << std::endl;}
 			if (absorption) {
 				hauteurAbsorption = impactSurface.dg.p.z;
-				//std::cout << hauteurAbsorption << std::endl;
+				std::cout << hauteurAbsorption << std::endl;
 			} else if (reflexionStandard) {
-				//echantillonnage d'une direction de reflexion
-				impactSurface.GetBSDF(RayDifferential(rayonSuivi))->Sample_f(
-						rayonSuivi.d, &directionReflexion);
-				//nouveau rayon suivi
-				rayonSuivi = Ray(impactSurface.dg.p, -directionReflexion,
-						RAY_EPSILON, INFINITY, 0.);
+				if (reflexionSpeculaire) {//reflexion speculaire
+					//gestion des reflexions speculaires, sur un plan Oyz
+					//on inverse simplement la coordonnée x pour avoir le vecteur de reflexion
+					directionReflexion = rayonSuivi.d;
+					directionReflexion.x = -directionReflexion.x;
+					rayonSuivi = Ray(impactSurface.dg.p, directionReflexion,
+							RAY_EPSILON, INFINITY, 0.);
+					if (imprimer) {
+						std::cout << "réflexion spéculaire"<< std::endl;
+					}
+				} else {//reflexion diffuse
+					//echantillonnage d'une direction de reflexion
+					impactSurface.GetBSDF(RayDifferential(rayonSuivi))->Sample_f(
+							rayonSuivi.d, &directionReflexion);
+					//nouveau rayon suivi
+					rayonSuivi = Ray(impactSurface.dg.p, -directionReflexion,
+							RAY_EPSILON, INFINITY, 0.);
+					if (imprimer) {
+						std::cout << "réflexion duffuse" << std::endl;
+					}
+				}
 			} else {
 				reflexionStandard = true;
 			}

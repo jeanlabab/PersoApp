@@ -23,4 +23,7 @@ rhoCellulose=extraireParametre("proprietes.in",12,2,1.);
 
 //reflectivite biofilm
 rhoBiofilm=extraireParametre("proprietes.in",13,2,1.);
+
+//reflexion parois speculaire
+reflexionSpeculaire=extraireParametre("proprietes.in",14,2,1.);
 //#fin de l'ajout par import_proprietes.pl
