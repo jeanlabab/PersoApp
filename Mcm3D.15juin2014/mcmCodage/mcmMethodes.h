@@ -81,9 +81,10 @@ double interpolLin(const double valeurX, const std::valarray<double> x,
 		std::cout << "---------------------------------" << std::endl;
 		std::cout << x[i + 1] << '\t' << y[i + 1] << std::endl;
 	}
-	if (i == 0 || i == x.size() - 1) {
+	if (imprimer && (i == 0 || i == x.size() - 1)) {
 		std::cout << "interpolation en bord de vecteur" << std::endl;
 	}
+	assert(result<=y.max() && result>=y.min());
 	return result;
 }
 
@@ -94,7 +95,8 @@ double interpolLin(const double valeurX, const std::valarray<double> x,
 }
 
 std::valarray<double> genererCumulInv(const std::valarray<double> x,
-		const std::valarray<double> y, const unsigned int nbValeursNbAlea) const {
+		const std::valarray<double> y,
+		const unsigned int nbValeursNbAlea) const {
 //cumule, normalise et inverse une distribution <y>=f(<x>)
 	assert(x.size() == y.size());
 	assert(x.size() > 5);
@@ -135,27 +137,29 @@ std::valarray<double> genererCumulInv(const std::valarray<double> x,
 	return cdfInv;
 }
 
-double tirageSurCumulInv(const std::valarray<double> cumuleeInversee, const double R) const {
+double tirageSurCumulInv(const std::valarray<double> cumuleeInversee,
+		const double R) const {
 //Tirage sur <cumuleeInversee> pour un nombre aléatoire <R>
 //exemple de cumuleeInversee: 		(0	0.40	0.5	0.90	1)
 //vecteur de nbAleatoire supposé:	(0	0.25	0.5	0.75	1)
 // nbNbAlea=cumuleeInversee.size()=5	tailleIntervalle=1/(5-1)=0.25
 
-	assert(0.<=R && R<=1.);
+	assert(0. <= R && R <= 1.);
 	//verification que <cumuleeInversee> est bien croissante
 	assert(cumuleeInversee[0] == cumuleeInversee.min());
-	assert(cumuleeInversee[cumuleeInversee.size() - 1] == cumuleeInversee.max());
+	assert(
+			cumuleeInversee[cumuleeInversee.size() - 1]
+					== cumuleeInversee.max());
 
 	unsigned int nbNbAlea(cumuleeInversee.size());
 	double tailleIntervalle(1. / double(nbNbAlea - 1));
 	unsigned int i;
-	i=(R / tailleIntervalle);
-	assert(i<cumuleeInversee.size());
+	i = (R / tailleIntervalle);
+	assert(i < cumuleeInversee.size());
 	double result;
 	result = cumuleeInversee[i]
 			+ (cumuleeInversee[i + 1] - cumuleeInversee[i])
-					* ((R-i*tailleIntervalle) / tailleIntervalle);
-
+					* ((R - i * tailleIntervalle) / tailleIntervalle);
 	return result;
 }
 
