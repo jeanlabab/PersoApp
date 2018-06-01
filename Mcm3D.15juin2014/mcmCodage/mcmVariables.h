@@ -36,3 +36,9 @@ std::valarray<double> lambdaCoprod;
 std::valarray<double> arrayEaCoprod;
 //#fin de l'ajout par import_proprietes.pl
 std::valarray<double> cumulInvLambda;
+
+double hauteurCuve;
+double rayonCuve;
+double altitudeMin;
+double altitudeMax;
+double aLight;

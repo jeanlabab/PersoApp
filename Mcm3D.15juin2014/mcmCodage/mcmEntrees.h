@@ -38,4 +38,9 @@ arrayEaCoprod = extraireFichier("EaCoproduit.txt",2, 2,401,1.);
 //#fin de l'ajout par import_proprietes.pl
 
 cumulInvLambda = genererCumulInv(lambdaSpectre, spectreNonNorm,1000);
-//imprimerValArray("cumulInvLambda", cumulInvLambda, mcmIsProcessus1());
+
+hauteurCuve = extraireParametre("geometrie.in",1,2,1.);
+rayonCuve = extraireParametre("geometrie.in",2,2,1.);
+altitudeMin = extraireParametre("geometrie.in",3,2,1.);
+altitudeMax = extraireParametre("geometrie.in",4,2,1.);
+aLight = extraireParametre("geometrie.in",5,2,1.);

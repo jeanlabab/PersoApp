@@ -84,7 +84,7 @@ double interpolLin(const double valeurX, const std::valarray<double> x,
 	if (imprimer && (i == 0 || i == x.size() - 1)) {
 		std::cout << "interpolation en bord de vecteur" << std::endl;
 	}
-	assert(result<=y.max() && result>=y.min());
+	assert(result <= y.max() && result >= y.min());
 	return result;
 }
 
@@ -233,7 +233,7 @@ std::valarray<double> extraireFichier(const std::string fichier,
 				lecture = 1; //commencer la lecture
 				i = 0; //réinitialisation de i
 			}
-			if (lecture) {
+			if (lecture && i < nbValeurs) {
 				std::istringstream iss(ligne);
 				std::string mot;
 				int j(0);
@@ -261,6 +261,44 @@ std::valarray<double> extraireFichier(const std::string fichier,
 		std::cout << "Impossible d'ouvrir " << fichier << std::endl;
 	}
 	return variable;
+}
+
+bool OrientedIntersect(const Ray &ray, Intersection *isect) const {
+	/* This methods is similar to Scene::Intersect() defined in scene.h
+	 except that here the intersection test is true only if the
+	 scalar product of the surface normal and the ray direction is
+	 negative at the intersection point (see surface orientation
+	 definition in the .pbrt file)                                   */
+	bool intersec, orient, oriented_intersec;
+	// Call of the Intersect method: intersec = true if there is an intersection
+	intersec = aggregate->Intersect(ray, isect);
+	// Condition on the scalar product of the surface normal and the ray direction
+	orient = (Dot((*isect).dg.nn, ray.d) <= 0.);
+	// The returned boolean is true if there is an intersection corresponding to the right orientation
+	oriented_intersec = (intersec && orient);
+	return oriented_intersec;
+}
+
+bool estDansLeVolumeReactionnel(Point X) const {
+//Test de l'appartenance au volume réactionnel
+	Vector vectTest;
+	Ray rayonTest;
+	Intersection impactTest;
+	bool dansVolumeReactionnel = false;
+	for (unsigned int i = 0; i < 3; i++) {
+		vectTest = UniformSampleSphere(mcmRng(),mcmRng());
+		rayonTest = Ray(X, vectTest, 0., INFINITY, 0.);
+		if (Intersect(rayonTest, &impactTest)) {
+			if (Dot(impactTest.dg.nn,rayonTest.d)<0){
+				dansVolumeReactionnel = true;
+			}
+			else{
+				dansVolumeReactionnel = false;
+				return dansVolumeReactionnel;
+			}
+		}
+	}
+	return dansVolumeReactionnel;
 }
 
 #endif // MCM_METHODES_H

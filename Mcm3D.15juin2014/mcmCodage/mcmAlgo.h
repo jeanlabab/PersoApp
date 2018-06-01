@@ -12,7 +12,7 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 //***********************************************************************************************
 
 //impression des chemins
-	bool imprimer(false);
+	bool imprimer(true);
 
 //Photons perdus
 	int nbPerdu(0);
@@ -27,16 +27,19 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 	unsigned int nbReflexions(0);
 	Intersection impactSurface;
 	double distanceSurface = 0.;
-	double longueurAbs(0.);
 	double longueurTotChemin(0.);
 	Spectrum rho; //intermédiaire pour reflectivité surface
 	float *reflectivite = new float[3];
 	Vector directionReflexion;
 	int nbReflexionsInox(0);
-	double reflectiviteInox(0.);
+	double reflectiviteInox(0.5);
 	int nbReflexionsFibres(0);
-	double reflectiviteFibres(0.);
-
+	double reflectiviteFibres(0.1);
+	Vector directionEmission;
+	Point pointEmission;
+	double R, angle;
+	Point x0;
+	bool pointOK(false);
 
 //***********************************************************************************************
 //			TIRAGE LONGUEUR D'ONDE
@@ -53,18 +56,27 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 //			SUIVI DE PHOTON
 //***********************************************************************************************
 
-//échantillonnage d'une surface d'émission
-	indiceSurface = mcmTirageDuneSurfaceIntegrable();
+//échantillonnage d'une position d'émission
+	while (!pointOK) {
+		R = sqrt(mcmRng()) * rayonCuve; //tirage en coordonées polaires  d'une distance au centre
+		angle = mcmRng() * 2 * M_PI; //tirage d'un angle en coordonnées polaires entre 0 et 2PI
+		pointEmission.x = R * cos(angle);
+		pointEmission.y = R * sin(angle);
+		pointEmission.z = altitudeMin
+				+ mcmRng() * (altitudeMax - altitudeMin) * 1.01;
+		pointOK = estDansLeVolumeReactionnel(pointEmission);
+	}
 //echantillonnage d'une direction d'émission
-	emission = (*lights[indiceSurface]).mcmTirageUniformeLambertien(poids);
-	rayonSuivi = Ray(emission.o, emission.d, RAY_EPSILON, INFINITY, 0.);
+	directionEmission = UniformSampleSphere(mcmRng(), mcmRng());
+	rayonSuivi = Ray(emission.o, directionEmission, RAY_EPSILON, INFINITY, 0.);
 	if (imprimer) {
-		std::cout << "\némission depuis " << emission.o << std::endl;
-		std::cout << "suivant " << emission.d << std::endl;
+		std::cout << "\némission depuis " << pointEmission << std::endl;
+		std::cout << "suivant " << directionEmission << std::endl;
 	}
 //boucle sur les reflexions
 	while (!absorption) {
-		if (!Intersect(rayonSuivi, &impactSurface)) {
+		if (!Intersect(rayonSuivi, &impactSurface)
+				&& OrientedIntersect(rayonSuivi, &impactSurface)) {
 			nbPerdu++;
 			if (imprimer) {
 				std::cout << "photon perdu, total:" << nbPerdu << std::endl;
@@ -74,72 +86,68 @@ mcmVecteurSommeDeRealisations Scene::realisation() const {
 		} else {
 			distanceSurface = Distance(rayonSuivi.o, impactSurface.dg.p);
 			assert(distanceSurface > 0.);
-			longueurAbs = cdfExpPinv(mcmRng(), kaTot);
-			assert(longueurAbs > 0.);
 //interaction sur surface
-			if (longueurAbs > distanceSurface) {
-				longueurTotChemin += distanceSurface;
-				nbReflexions++;
+			longueurTotChemin += distanceSurface;
+			nbReflexions++;
 
-				assert(nbReflexions < 1000);
+			assert(nbReflexions < 1000);
 
-				//indice de la surface
-				impactSurface.GetBSDF(RayDifferential(rayonSuivi))->get_mcmSurfaceAvecNumero(
-						indiceSurface);
-				//reflectivité
-				rho = impactSurface.GetBSDF(RayDifferential(rayonSuivi))->rho();
-				rho.GetColor(reflectivite);
-				if (imprimer) {
-					std::cout << "intersection sur surface";
-				}
+			//indice de la surface
+			impactSurface.GetBSDF(RayDifferential(rayonSuivi))->get_mcmSurfaceAvecNumero(
+					indiceSurface);
+			//reflectivité
+			rho = impactSurface.GetBSDF(RayDifferential(rayonSuivi))->rho();
+			rho.GetColor(reflectivite);
+			if (imprimer) {
+				std::cout << "intersection sur surface";
+			}
 //interaction avec les fibres
-				if (indiceSurface == 0) {
-					reflectiviteFibres = reflectivite[0];
+			if (indiceSurface == 0) {
+				reflectiviteFibres = reflectivite[0];
+				if (mcmRng() < reflectiviteFibres) {
 					nbReflexionsFibres++;
-					if (imprimer) {
-						std::cout << " fibre";
-					}
+				} else {
+					absorption = true;
 				}
+				if (imprimer) {
+					std::cout << " fibre";
+				}
+			}
 //interaction avec la cuve
-				if (indiceSurface == 1) {
-					reflectiviteInox = reflectivite[0];
-					nbReflexionsInox++;
-					if (imprimer) {
-						std::cout << " inox";
-					}
-				}
+			if (indiceSurface == 1) {
+				reflectiviteInox = reflectivite[0];
+				nbReflexionsInox++;
 				if (imprimer) {
-					std::cout << " au point " << impactSurface.dg.p
-							<< std::endl;
-				}
-				//echantillonnage d'une direction de reflexion
-				impactSurface.GetBSDF(RayDifferential(rayonSuivi))->Sample_f(
-						rayonSuivi.d, &directionReflexion);
-				//nouveau rayon suivi
-				rayonSuivi = Ray(impactSurface.dg.p, -directionReflexion,
-						RAY_EPSILON, INFINITY, 0.);
-			}
-//absorption dans le volume
-			else {
-				longueurTotChemin += longueurAbs;
-				absorption = true;
-				if (imprimer) {
-					std::cout << "absorption dans le volume " << std::endl;
+					std::cout << " inox";
 				}
 			}
+			if (imprimer) {
+				std::cout << " au point " << impactSurface.dg.p << std::endl;
+			}
+			//echantillonnage d'une direction de reflexion
+			impactSurface.GetBSDF(RayDifferential(rayonSuivi))->Sample_f(
+					rayonSuivi.d, &directionReflexion);
+			//nouveau rayon suivi
+			rayonSuivi = Ray(impactSurface.dg.p, -directionReflexion,
+					RAY_EPSILON, INFINITY, 0.);
 		}
 	}
-	poids = kaReinecke / kaTot //* exp(-kaTot * longueurTotChemin)
+
+	poids = 4 * kaTot / aLight * kaReinecke / kaTot * exp(-kaTot * longueurTotChemin)
 			* std::pow(reflectiviteFibres, nbReflexionsFibres)
-			* std::pow(reflectiviteInox, nbReflexionsInox);
-	assert(poids >= 0. && poids <= 1.);
+			* std::pow(reflectiviteInox, nbReflexionsInox)
+			/ (1 - reflectiviteFibres);
+	if (imprimer) {std::cout << poids << std::endl;}
+
+	assert(poids >= 0.);// && poids <= 1.);
+
 
 //***********************************************************************************************
 //			FIN DU SUIVI DE PHOTON / PASSAGE DES POIDS
 //***********************************************************************************************
 	vsr.initialisationUneComposante(
 			indiceDeLaCoordonneeDuVecteurSommeDeRealisations(1),
-			nbPerdu / (double)(nbPerdu + 1));
+			nbPerdu / (double) (nbPerdu + 1));
 	vsr.initialisationUneComposante(
 			indiceDeLaCoordonneeDuVecteurSommeDeRealisations(2), poids);
 	vsr.initialisationUneComposante(
